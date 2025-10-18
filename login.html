@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login form</title>
+    <link rel="stylesheet" href="index.css">
+    <style type="text/css">
+        body{
+            font-size: 16px;
+            background: #f9f9f9;
+        }
+        h2{
+            text-align: center;
+            border-bottom: 2px solid #344c92;
+        }
+        /* Form styling moved to index.css (glass-form) */
+    </style>
+</head>
+<body>
+    <head>
+        <link rel="icon" href="logo.jpg" />
+    </head>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo"><img src="logo.jpg" alt="logo"></div>
+            <div class="site-title">Talent Track</div>
+            <div style="margin-left:12px;"><div class="searchbar"><img src="logo.jpg" alt="logo"><input aria-label="Search jobs or companies" placeholder="Search jobs or companies"></div></div>
+            <nav class="nav-item">
+                <a href="index.html">Home</a>
+                <a href="register.html">Register</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section>
+           <center><h1>Talent Tarea-Login</h1></center>
+                        <div class="glass-form-wrapper">
+                            <form id="loginForm" class="glass-form" action="login.php" action="universal_form_handler.php" method="post">
+                                <h2>Login</h2>
+                                <div class="glass-field">
+                                    <label for="role">Role</label>
+                                    <select id="role" name="role">
+                                            <option value="student">Student</option>
+                                            <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+
+                                <div class="glass-field">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required placeholder="you@example.com">
+                                </div>
+
+                                <div class="glass-field">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                                </div>
+                                <div class="glass-field" style="text-align:left;">
+                                    <label><input type="checkbox" id="remember" name="remember"> Remember me</label>
+                                </div>
+
+                                <div class="glass-actions">
+                                    <button class="glass-btn primary" type="submit">Login</button>
+                                </div>
+                                <p class="glass-small">Don't have an account? <a href="register.html">Sign up</a></p>
+                            </form>
+                        </div>
+            <script>
+                // Show server-side error (redirected with ?error=...)
+                (function(){
+                    function qs(name){
+                        name = name.replace(/[\[\]]/g,'\\$&');
+                        var r = new RegExp('[?&]'+name+'(=([^&#]*)|&|#|$)'), m = r.exec(window.location.href);
+                        if(!m) return null; if(!m[2]) return '';
+                        return decodeURIComponent(m[2].replace(/\+/g,' '));
+                    }
+                    var err = qs('error');
+                    if(err){
+                        var box = document.createElement('div');
+                        box.style.background = '#fee2e2';
+                        box.style.color = '#991b1b';
+                        box.style.padding = '10px 12px';
+                        box.style.borderRadius = '8px';
+                        box.style.margin = '10px auto';
+                        box.style.maxWidth = '380px';
+                        box.style.textAlign = 'center';
+                        box.textContent = err;
+                        var wrapper = document.querySelector('.glass-form-wrapper');
+                        wrapper.parentNode.insertBefore(box, wrapper);
+                    }
+
+                    var success = qs('success');
+                    if(success){
+                        var box = document.createElement('div');
+                        box.style.background = '#ecfdf5';
+                        box.style.color = '#065f46';
+                        box.style.padding = '10px 12px';
+                        box.style.borderRadius = '8px';
+                        box.style.margin = '10px auto';
+                        box.style.maxWidth = '380px';
+                        box.style.textAlign = 'center';
+                        box.textContent = success;
+                        var wrapper = document.querySelector('.glass-form-wrapper');
+                        wrapper.parentNode.insertBefore(box, wrapper);
+                    }
+
+                    // Prefill email from remember cookie (if available)
+                    function readCookie(name){
+                        var v = document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)');
+                        return v ? decodeURIComponent(v.pop()) : null;
+                    }
+                    var remembered = readCookie('remember_email');
+                    if(remembered){ document.getElementById('email').value = remembered; document.getElementById('remember').checked = true; }
+                })();
+            </script>
+        </section>
+    </main><br><br><br>
+
+    <footer>
+        <p>&copy; 2025 Talent Track.All rights reserved.</p>
+    </footer>
+</body>
+</html>

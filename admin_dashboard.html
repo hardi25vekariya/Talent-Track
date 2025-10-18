@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin_Dashbord</title>
+    <link rel="stylesheet" href="index.css">
+    <style type="text/css">
+        body{
+            font-size: 16px;
+            background: #f9f9f9;
+            background-image: url(bgi_admin.jpg);
+             background-size:cover;
+        }
+        h2{
+            text-align: center;
+            /*border-bottom: 2px solid #344c92;*/
+        }
+        .a1{
+             color: #525a4f;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <head>
+        <link rel="icon" href="logo.jpg" />
+    </head>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo"><img src="logo.jpg" alt="Talent Track logo"></div>
+            <div class="site-title">Talent Track — Admin</div>
+                    <div style="margin-left:12px;">
+                        <div class="searchbar"><img src="logo.jpg" alt="logo"><input aria-label="Search jobs or candidates" placeholder="Search jobs or candidates"></div>
+                    </div>
+            <nav class="nav-item">
+                <a href="post_job.html">Post Job</a>
+                <a href="view_applications.html">View Applications</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+    <!--
+    <heder>
+        <h1>Talent Track - Adim Dashboard</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="post_job.html">Post Job</a>
+                </li>
+                <li>
+                    <a href="view_applications.html">View Applications</a>
+                </li>
+                <li>
+                    <a href="index.html">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </heder>-->
+
+    <main>
+        <div class="container">
+            <main>
+                <h1>Admin Dashboard</h1>
+                <p>Welcome back. Use the panels below to manage jobs and review applications.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:18px;">
+                    <div style="background:#fff;padding:16px;border-radius:8px;box-shadow:0 6px 18px rgba(2,6,23,0.06)">
+                        <h3>Post a Job</h3>
+                        <p>Create and publish new job listings.</p>
+                        <a class="btn btn-primary" href="post_job.html">Post Job</a>
+                    </div>
+
+                    <div style="background:#fff;padding:16px;border-radius:8px;box-shadow:0 6px 18px rgba(2,6,23,0.06)">
+                        <h3>View Applications</h3>
+                        <p>Review student applications and update status.</p>
+                        <a class="btn btn-outline" href="view_applications.html">View Applications</a>
+                    </div>
+
+                    <div style="background:#fff;padding:16px;border-radius:8px;box-shadow:0 6px 18px rgba(2,6,23,0.06)">
+                        <h3>Manage Jobs</h3>
+                        <p>Edit or remove active job postings.</p>
+                        <a class="btn btn-outline" href="job_listings.html">Manage Jobs</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </main>
+    <br><br><br><br><br><br>
+     <footer>
+        <p>&copy; 2025 Talent Track.All rights reserved.</p>
+    </footer>
+</body>
+</html>

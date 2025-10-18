@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Track - Home</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo">
+                <img src="logo.jpg" alt="logo" style="height: 40px;">
+            </div>
+            <div class="site-title">Talent Track</div>
+            <div style="margin-left:12px;">
+                <div class="searchbar">
+                    <img src="logo.jpg" alt="search" style="height: 20px;">
+                    <input aria-label="Search jobs or companies" placeholder="Search jobs or companies">
+                </div>
+            </div>
+            <nav class="nav-item">
+                <a href="index.html" style="color: #667eea;">Home</a>
+                <a href="about.html">About</a>
+                <a href="events.php">Events</a>
+                <a href="contact.html">Contact</a>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <?php if ($_SESSION['role'] === 'admin'): ?>
+                        <a href="admin_dashboard.php">Dashboard</a>
+                    <?php else: ?>
+                        <a href="student_dashboard.php">Dashboard</a>
+                    <?php endif; ?>
+                    <a href="profile.php">Profile</a>
+                    <a href="logout.php">Logout</a>
+                    <span style="color: #667eea; margin-left: 15px;">
+                        Welcome, <?php echo htmlspecialchars($_SESSION['user_name']); ?>
+                    </span>
+                <?php else: ?>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                    <a href="post_job.html"></a>
+                <?php endif; ?>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1>Welcome to Talent Track 🎓</h1>
+            <p>Your gateway to academic excellence and career opportunities</p>
+            <div style="margin-top: 30px;">
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    <a href="register.html" style="padding: 12px 30px; background: white; color: #667eea; text-decoration: none; border-radius: 25px; margin: 0 10px; font-weight: bold;">Get Started</a>
+                    <a href="login.html" style="padding: 12px 30px; border: 2px solid white; color: white; text-decoration: none; border-radius: 25px; margin: 0 10px;">Login</a>
+                <?php else: ?>
+                    <a href="<?php echo $_SESSION['role'] === 'admin' ? 'admin_dashboard.php' : 'student_dashboard.php'; ?>" style="padding: 12px 30px; background: white; color: #667eea; text-decoration: none; border-radius: 25px; margin: 0 10px; font-weight: bold;">Go to Dashboard</a>
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>🎯 Career Guidance</h3>
+                <p>Get personalized career advice and job opportunities tailored to your skills.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📚 Academic Resources</h3>
+                <p>Access study materials, course information, and academic support.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📅 Events & Workshops</h3>
+                <p>Participate in seminars, workshops, and campus events.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 30px; background: #f8f9fa; margin-top: 50px;">
+        <p>&copy; 2025 Talent Track. All rights reserved.</p>
+    </footer>
+</body>
+</html>

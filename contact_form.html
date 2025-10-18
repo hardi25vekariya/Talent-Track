@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form - Talent Track</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo">
+                <img src="logo.jpg" alt="logo" style="height: 40px;">
+            </div>
+            <div class="site-title">Talent Track</div>
+            <nav class="nav-item">
+                <a href="index.html">Home</a>
+                <a href="contact_form.html" class="active">Contact</a>
+                <a href="universal_form_handler.php">View Submissions</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="max-width: 600px; margin: 50px auto; padding: 20px;">
+        <div class="glass-form-wrapper">
+            <form class="glass-form" action="universal_form_handler.php" method="POST">
+                <!-- Hidden field to identify form -->
+                <input type="hidden" name="form_name" value="contact_form">
+                
+                <h2>Contact Us</h2>
+                <p style="text-align: center; color: #666;">
+                    This form will automatically save data to text file.
+                </p>
+
+                <div class="glass-field">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="glass-field">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+
+                <div class="glass-field">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                </div>
+
+                <div class="glass-field">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject">
+                        <option value="">Select a subject</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Job Application">Job Application</option>
+                        <option value="Technical Support">Technical Support</option>
+                    </select>
+                </div>
+
+                <div class="glass-field">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Enter your message..."></textarea>
+                </div>
+
+                <div class="glass-actions">
+                    <button type="submit" class="glass-btn primary">Send Message</button>
+                    <button type="reset" class="glass-btn secondary">Clear Form</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

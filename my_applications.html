@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Applications - Job Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <style type="text/css">
+        body{
+            font-size: 16px;
+            background: #f9f9f9;
+           /* background-image: url(bgi_admin.jpg);*/
+             background-size:cover;
+        }
+        
+        .a1{
+             color: #525a4f;
+             text-align: center;
+        }
+    </style>
+</head>
+<body>
+        <head>
+            <link rel="icon" href="logo.jpg" />
+        </head>
+        <header>
+            <div class="navbar">
+                <div class="nav-logo"><img src="logo.jpg" alt="logo"></div>
+                <div class="site-title">Talent Track</div>
+                <div style="margin-left:12px;"><div class="searchbar"><img src="logo.jpg" alt="logo"><input aria-label="Search your applications" placeholder="Search your applications"></div></div>
+                <nav class="nav-item">
+                    <a href="job_listings.html">Job Listings</a>
+                    <a href="student_dashboard.html">Dashboard</a>
+                </nav>
+            </div>
+        </header>
+    <!--
+    <header>
+        <h1>Talent Track - My Applications</h1>
+        <nav>
+            <ul>
+                <li><a href="student_dashboard.html">Dashboard</a></li>
+                <li><a href="job_listings.html">Job Listings</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>-->
+    <main>
+        <div class="container">
+            <main>
+                <h1>My Applications</h1>
+                <section>
+                    <h2>Jobs you've applied for</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Job Title</th>
+                                <th>Company</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Applied On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                            <tr>
+                                                <td>Frontend Developer</td>
+                                                <td>Infosys</td>
+                                                <td>Bangalore</td>
+                                                <td><span class="badge badge-reviewed">Under Review</span></td>
+                                                <td>2025-07-05</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Product Intern</td>
+                                                <td>Flipkart</td>
+                                                <td>Bangalore</td>
+                                                <td><span class="badge badge-pending">Shortlisted</span></td>
+                                                <td>2025-06-28</td>
+                                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Talent Track. All rights reserved.</p>
+    </footer>
+</body>
+</html>

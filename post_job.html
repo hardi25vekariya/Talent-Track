@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Job</title>
+     <link rel="stylesheet" href="index.css">
+    <style type="text/css">
+        body{
+            font-size: 16px;
+            background: #f9f9f9;
+        }
+        h2{
+            text-align: center;
+            border-bottom: 2px solid #344c92;
+        }
+        /* Inline form styles removed; using shared .glass-form in index.css */
+    </style>
+   
+</head>
+<body>
+    <head>
+        <link rel="icon" href="logo.jpg" />
+    </head>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo"><img src="logo.jpg" alt="logo"></div>
+            <div class="site-title">Talent Track</div>
+            <div style="margin-left:12px;"><div class="searchbar"><img src="logo.jpg" alt="logo"><input aria-label="Search jobs or companies" placeholder="Search jobs or companies"></div></div>
+            <nav class="nav-item">
+                <a href="index.html"> Home</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+                <a href="index.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+    <!--
+    <heder>
+        <h1>Talent Track - Post a New Job</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="admin_dashboard.html">Dashboard</a>
+                </li>
+                <li>
+                    <a href="view_applications.html">Viwe Application</a>
+                </li>
+                <li>
+                    <a href="index.html">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </heder>-->
+    <main>
+        <section>
+           <center><h1>Talent Track - Post a New Job</h1></center> 
+           
+                        <div class="glass-form-wrapper">
+                            <form class="glass-form" action="#" method="post">
+                                <h2>Post a Job</h2>
+                                <div class="glass-field">
+                                    <label for="job_title">Job title</label>
+                                    <input type="text" id="job_title" name="job_title" required>
+                                </div>
+
+                                <div class="glass-field">
+                                    <label for="company">Company</label>
+                                    <input type="text" id="company" name="company" required>
+                                </div>
+
+                                <div class="glass-field">
+                                    <label for="location">Location</label>
+                                    <input type="text" id="location" name="location" required>
+                                </div>
+
+                                <div class="glass-field">
+                                    <label for="description">Job description</label>
+                                    <textarea id="description" name="description" rows="4"></textarea>
+                                </div>
+
+                                <div class="glass-actions">
+                                    <button class="glass-btn primary" type="submit">Publish</button>
+                                </div>
+                            </form>
+                        </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Talent Track.All rights reserved.</p>
+    </footer>
+</body>
+</html>

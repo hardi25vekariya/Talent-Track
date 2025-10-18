@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Details - Talent Track</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .job-details-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .job-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .job-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .job-main {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .job-sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        .section h3 {
+            color: #2d3748;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .requirements-list, .responsibilities-list, .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+        .requirements-list li, .responsibilities-list li, .benefits-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .requirements-list li:before {
+            content: "✓";
+            color: #10b981;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .responsibilities-list li:before {
+            content: "•";
+            color: #667eea;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .benefits-list li:before {
+            content: "🎁";
+            position: absolute;
+            left: 0;
+        }
+        .company-info {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            background: #f7fafc;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+            color: #667eea;
+            border: 3px solid #e2e8f0;
+            font-size: 1.2em;
+        }
+        .job-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        .meta-icon {
+            font-size: 1.2em;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background: #f7fafc;
+            transform: translateX(-5px);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #cbd5e0;
+            color: #4a5568;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .btn-outline:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6b46c1);
+            transform: translateY(-2px);
+        }
+        
+        /* Updated Navbar Styles */
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #0b2242 0%, #1b2b55 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-logo img {
+            height: 40px;
+        }
+        
+        .site-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            margin-left: 10px;
+        }
+        
+        .searchbar {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 8px 15px;
+            margin-left: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .searchbar input {
+            border: none;
+            background: transparent;
+            margin-left: 8px;
+            outline: none;
+            width: 200px;
+            color: white;
+        }
+        
+        .searchbar input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: auto;
+        }
+        
+        .nav-item a {
+            text-decoration: none;
+            color: #dbeafe;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+        
+        .nav-item a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .nav-item a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo">
+                <img src="logo.jpg" alt="logo" style="height: 40px;">
+            </div>
+            <div class="site-title">Talent Track</div>
+            <div style="margin-left:12px;">
+                <div class="searchbar">
+                    <img src="logo.jpg" alt="logo" style="height: 20px; filter: brightness(0) invert(1);">
+                    <input aria-label="Search jobs" placeholder="Search jobs">
+                </div>
+            </div>
+            <nav class="nav-item">
+                <a href="student_dashboard.html">Dashboard</a>
+                <a href="job_listings.html">Job Listings</a>
+                <a href="my_applications.html">My Applications</a>
+                <a href="profile.html">Profile</a>
+                <a href="logout.php">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="job-details-container">
+        <a href="job_listings.html" class="back-link">← Back to Job Listings</a>
+
+        <div id="job-header" class="job-header">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+
+        <div class="job-content">
+            <div class="job-main">
+                <div id="job-description" class="section">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+
+                <div id="job-responsibilities" class="section">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+
+                <div id="job-requirements" class="section">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+
+                <div id="job-benefits" class="section">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+
+                <div class="action-buttons">
+                    <a id="apply-link" class="btn btn-primary" href="#">
+                        🚀 Apply for this Job
+                    </a>
+                    <button class="btn btn-outline" onclick="saveJob()">
+                        💾 Save for Later
+                    </button>
+                </div>
+            </div>
+
+            <div class="job-sidebar">
+                <div id="company-info" class="company-info">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+
+                <div id="job-meta-grid" class="job-meta-grid">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+
+                <div style="margin-top: 25px;">
+                    <h4 style="margin-bottom: 15px;">Share this Job</h4>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-outline" style="flex: 1;" onclick="shareJob('linkedin')">
+                            💼 LinkedIn
+                        </button>
+                        <button class="btn btn-outline" style="flex: 1;" onclick="shareJob('whatsapp')">
+                            💬 WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px; padding: 20px; background: #f0f9ff; border-radius: 8px;">
+                    <h4 style="margin: 0 0 10px 0; color: #0369a1;">💡 Quick Apply Tip</h4>
+                    <p style="margin: 0; color: #0c4a6e; font-size: 14px;">
+                        Make sure your resume is updated and tailor your cover letter to this specific role for better chances.
+                    </p>
+                </div>
+
+                <div style="margin-top: 25px; padding: 20px; background: #fef7ed; border-radius: 8px;">
+                    <h4 style="margin: 0 0 10px 0; color: #9a3412;">⚠️ Application Deadline</h4>
+                    <p id="deadline-text" style="margin: 0; color: #c2410c; font-size: 14px;">
+                        <!-- Dynamic deadline will be loaded here -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background: linear-gradient(90deg, #0b2242, #1b2b55); color: #dbeafe; text-align: center; padding: 40px 0; margin-top: 60px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h3 style="margin: 0 0 20px 0; color: #fff;">Talent Track - Career Portal</h3>
+            <p style="margin: 20px 0 0 0; color: #cfe8ff; border-top: 1px solid #334; padding-top: 20px;">
+                &copy; 2025 Talent Track. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Job data for all positions
+        const jobData = {
+            1: {
+                title: "Frontend Developer (React)",
+                company: "Tata Consultancy Services",
+                location: "Bangalore",
+                salary: "₹6-10 LPA",
+                type: "Full-time",
+                posted: "Jan 15, 2024",
+                deadline: "Feb 15, 2024",
+                applicants: 24,
+                logo: "TCS",
+                description: "We are looking for a skilled Frontend Developer to join our dynamic team. The ideal candidate will be responsible for building responsive web applications using React.js and modern frontend technologies. You will work closely with designers and backend developers to create seamless user experiences.",
+                responsibilities: [
+                    "Develop new user-facing features using React.js",
+                    "Build reusable components and front-end libraries",
+                    "Translate designs and wireframes into high-quality code",
+                    "Optimize components for maximum performance",
+                    "Collaborate with UX designers and backend developers",
+                    "Participate in code reviews and team meetings"
+                ],
+                requirements: [
+                    "Bachelor's degree in Computer Science or related field",
+                    "2+ years of experience with React.js",
+                    "Proficiency in JavaScript, HTML5, and CSS3",
+                    "Experience with state management libraries like Redux",
+                    "Knowledge of modern frontend build tools",
+                    "Familiarity with RESTful APIs and GraphQL",
+                    "Understanding of responsive web design"
+                ],
+                benefits: [
+                    "Comprehensive health insurance",
+                    "Flexible work hours and remote options",
+                    "Learning and development opportunities",
+                    "Performance bonuses and incentives",
+                    "Career growth and advancement",
+                    "Modern workplace with great amenities"
+                ]
+            },
+            2: {
+                title: "Data Analyst",
+                company: "Infosys",
+                location: "Pune",
+                salary: "₹4-7 LPA",
+                type: "Full-time",
+                posted: "Jan 18, 2024",
+                deadline: "Feb 18, 2024",
+                applicants: 18,
+                logo: "INFY",
+                description: "Join our data analytics team to analyze complex datasets, create insightful dashboards, and provide data-driven recommendations to stakeholders. This role requires strong analytical skills and experience with data visualization tools.",
+                responsibilities: [
+                    "Analyze large datasets to extract meaningful insights",
+                    "Create interactive dashboards and reports",
+                    "Collaborate with business stakeholders",
+                    "Develop data models and algorithms",
+                    "Ensure data quality and integrity",
+                    "Present findings to technical and non-technical audiences"
+                ],
+                requirements: [
+                    "Bachelor's degree in Statistics, Mathematics, or related field",
+                    "1+ years of experience in data analysis",
+                    "Proficiency in SQL and Python",
+                    "Experience with data visualization tools (Tableau, Power BI)",
+                    "Strong analytical and problem-solving skills",
+                    "Knowledge of statistical analysis techniques"
+                ],
+                benefits: [
+                    "Competitive salary package",
+                    "Health and wellness programs",
+                    "Professional certification support",
+                    "Flexible work arrangements",
+                    "Collaborative work environment",
+                    "Career development programs"
+                ]
+            },
+            3: {
+                title: "Backend Engineer (Java)",
+                company: "Wipro",
+                location: "Hyderabad",
+                salary: "₹8-12 LPA",
+                type: "Full-time",
+                posted: "Jan 20, 2024",
+                deadline: "Feb 20, 2024",
+                applicants: 32,
+                logo: "WPR",
+                description: "We are seeking a Backend Engineer to design and develop scalable microservices using Spring Boot. You will work on cloud-native applications and ensure high performance and reliability of our backend systems.",
+                responsibilities: [
+                    "Design and develop microservices architecture",
+                    "Implement RESTful APIs and web services",
+                    "Optimize application performance and scalability",
+                    "Collaborate with frontend and DevOps teams",
+                    "Write clean, maintainable code",
+                    "Participate in system design and architecture"
+                ],
+                requirements: [
+                    "Bachelor's degree in Computer Science or equivalent",
+                    "3+ years of Java development experience",
+                    "Strong knowledge of Spring Boot framework",
+                    "Experience with microservices architecture",
+                    "Knowledge of SQL and NoSQL databases",
+                    "Understanding of cloud platforms (AWS/Azure)"
+                ],
+                benefits: [
+                    "Competitive compensation package",
+                    "Comprehensive health benefits",
+                    "Remote work flexibility",
+                    "Learning and development budget",
+                    "Stock options program",
+                    "Modern office facilities"
+                ]
+            },
+            4: {
+                title: "Product Management Intern",
+                company: "Flipkart",
+                location: "Bangalore",
+                salary: "₹30K/month",
+                type: "Internship",
+                posted: "Jan 22, 2024",
+                deadline: "Feb 22, 2024",
+                applicants: 45,
+                logo: "FLP",
+                description: "Exciting internship opportunity for students interested in product management. Work with experienced product managers on real-world projects and gain hands-on experience in the e-commerce domain.",
+                responsibilities: [
+                    "Assist in product roadmap planning",
+                    "Conduct user research and market analysis",
+                    "Create product requirements documents",
+                    "Collaborate with engineering and design teams",
+                    "Analyze product metrics and user feedback",
+                    "Participate in product strategy discussions"
+                ],
+                requirements: [
+                    "Currently pursuing Bachelor's/Master's degree",
+                    "Strong analytical and communication skills",
+                    "Interest in technology and product development",
+                    "Basic understanding of product management",
+                    "Ability to work in a fast-paced environment",
+                    "Previous internship experience is a plus"
+                ],
+                benefits: [
+                    "Monthly stipend",
+                    "Mentorship from senior product managers",
+                    "Certificate of completion",
+                    "Networking opportunities",
+                    "Potential full-time offer",
+                    "Learning and development sessions"
+                ]
+            },
+            5: {
+                title: "Mobile Developer (React Native)",
+                company: "Zoho Corporation",
+                location: "Chennai",
+                salary: "₹5-9 LPA",
+                type: "Full-time",
+                posted: "Jan 25, 2024",
+                deadline: "Feb 25, 2024",
+                applicants: 28,
+                logo: "ZOHO",
+                description: "Join our mobile development team to create cross-platform applications using React Native. You'll work on exciting projects and collaborate with designers to deliver exceptional user experiences.",
+                responsibilities: [
+                    "Develop cross-platform mobile applications",
+                    "Collaborate with UI/UX designers",
+                    "Implement responsive and performant UI",
+                    "Integrate with backend APIs",
+                    "Write unit and integration tests",
+                    "Optimize app performance"
+                ],
+                requirements: [
+                    "Bachelor's degree in Computer Science or related",
+                    "1+ years of React Native experience",
+                    "Knowledge of JavaScript and TypeScript",
+                    "Experience with mobile app deployment",
+                    "Understanding of REST APIs",
+                    "Familiarity with version control systems"
+                ],
+                benefits: [
+                    "Competitive salary package",
+                    "Health and dental insurance",
+                    "Flexible working hours",
+                    "Professional development support",
+                    "Employee stock purchase plan",
+                    "On-site recreational facilities"
+                ]
+            },
+            6: {
+                title: "Cloud Engineer",
+                company: "Accenture",
+                location: "Mumbai",
+                salary: "₹7-11 LPA",
+                type: "Full-time",
+                posted: "Jan 28, 2024",
+                deadline: "Feb 28, 2024",
+                applicants: 36,
+                logo: "ACC",
+                description: "We are looking for a Cloud Engineer to implement and manage cloud infrastructure on AWS/Azure. You will automate deployment processes and ensure cloud security best practices are followed.",
+                responsibilities: [
+                    "Design and implement cloud infrastructure",
+                    "Automate deployment and scaling processes",
+                    "Monitor cloud performance and costs",
+                    "Implement security best practices",
+                    "Collaborate with development teams",
+                    "Troubleshoot cloud infrastructure issues"
+                ],
+                requirements: [
+                    "Bachelor's degree in IT or related field",
+                    "2+ years of cloud engineering experience",
+                    "Certification in AWS or Azure preferred",
+                    "Experience with Infrastructure as Code",
+                    "Knowledge of containerization technologies",
+                    "Understanding of networking concepts"
+                ],
+                benefits: [
+                    "Comprehensive benefits package",
+                    "Remote work options",
+                    "Professional certification reimbursement",
+                    "Performance bonuses",
+                    "Career advancement opportunities",
+                    "Global project exposure"
+                ]
+            },
+            7: {
+                title: "UI/UX Designer",
+                company: "HCL Technologies",
+                location: "Noida",
+                salary: "₹5-8 LPA",
+                type: "Full-time",
+                posted: "Jan 30, 2024",
+                deadline: "Feb 28, 2024",
+                applicants: 22,
+                logo: "HCL",
+                description: "Create user-centered designs for web and mobile applications. Conduct user research and collaborate with development teams to deliver exceptional digital experiences.",
+                responsibilities: [
+                    "Create wireframes, prototypes, and mockups",
+                    "Conduct user research and usability testing",
+                    "Collaborate with product managers and developers",
+                    "Develop design systems and style guides",
+                    "Create responsive and accessible designs",
+                    "Stay updated with design trends"
+                ],
+                requirements: [
+                    "Bachelor's degree in Design or related field",
+                    "2+ years of UI/UX design experience",
+                    "Proficiency in design tools (Figma, Sketch)",
+                    "Strong portfolio of design projects",
+                    "Understanding of user-centered design",
+                    "Knowledge of front-end development basics"
+                ],
+                benefits: [
+                    "Competitive salary package",
+                    "Health and wellness benefits",
+                    "Flexible work arrangements",
+                    "Design software subscriptions",
+                    "Conference and workshop opportunities",
+                    "Creative work environment"
+                ]
+            },
+            8: {
+                title: "DevOps Engineer",
+                company: "IBM India",
+                location: "Bangalore",
+                salary: "₹9-14 LPA",
+                type: "Full-time",
+                posted: "Feb 1, 2024",
+                deadline: "Mar 1, 2024",
+                applicants: 29,
+                logo: "IBM",
+                description: "Implement CI/CD pipelines, manage container orchestration, and automate infrastructure using tools like Docker, Kubernetes, and Jenkins in our dynamic DevOps team.",
+                responsibilities: [
+                    "Design and implement CI/CD pipelines",
+                    "Manage container orchestration platforms",
+                    "Automate infrastructure provisioning",
+                    "Monitor system performance and availability",
+                    "Collaborate with development and operations teams",
+                    "Implement security and compliance measures"
+                ],
+                requirements: [
+                    "Bachelor's degree in Computer Science",
+                    "3+ years of DevOps experience",
+                    "Expertise in Docker and Kubernetes",
+                    "Experience with CI/CD tools (Jenkins, GitLab)",
+                    "Knowledge of scripting languages",
+                    "Understanding of cloud platforms"
+                ],
+                benefits: [
+                    "Competitive compensation",
+                    "Comprehensive health coverage",
+                    "Remote and flexible work options",
+                    "Professional development budget",
+                    "Stock options and bonuses",
+                    "Cutting-edge technology exposure"
+                ]
+            }
+        };
+
+        // Get job ID from URL parameters
+        function getJobIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseInt(urlParams.get('job_id')) || 1;
+        }
+
+        // Load job data based on ID
+        function loadJobData() {
+            const jobId = getJobIdFromURL();
+            const job = jobData[jobId];
+
+            if (!job) {
+                // Redirect to listings if job not found
+                window.location.href = 'job_listings.html';
+                return;
+            }
+
+            // Update page title
+            document.title = `${job.title} - ${job.company} - Talent Track`;
+
+            // Update job header
+            document.getElementById('job-header').innerHTML = `
+                <h1 style="margin: 0 0 10px 0; font-size: 2.2em;">${job.title}</h1>
+                <div style="font-size: 1.2em; opacity: 0.9; margin-bottom: 15px;">
+                    ${job.company} • ${job.location}
+                </div>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; opacity: 0.9;">
+                    <div>💰 ${job.salary}</div>
+                    <div>⏱️ ${job.type}</div>
+                    <div>📅 Posted: ${job.posted}</div>
+                </div>
+            `;
+
+            // Update job description
+            document.getElementById('job-description').innerHTML = `
+                <h3>📝 Job Description</h3>
+                <p style="line-height: 1.7; font-size: 16px; color: #4a5568;">${job.description}</p>
+            `;
+
+            // Update responsibilities
+            document.getElementById('job-responsibilities').innerHTML = `
+                <h3>🎯 Key Responsibilities</h3>
+                <ul class="responsibilities-list">
+                    ${job.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                </ul>
+            `;
+
+            // Update requirements
+            document.getElementById('job-requirements').innerHTML = `
+                <h3>✅ Requirements</h3>
+                <ul class="requirements-list">
+                    ${job.requirements.map(req => `<li>${req}</li>`).join('')}
+                </ul>
+            `;
+
+            // Update benefits
+            document.getElementById('job-benefits').innerHTML = `
+                <h3>🎁 Benefits & Perks</h3>
+                <ul class="benefits-list">
+                    ${job.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+                </ul>
+            `;
+
+            // Update company info
+            document.getElementById('company-info').innerHTML = `
+                <div class="company-logo">${job.logo}</div>
+                <h3 style="margin: 0 0 10px 0;">${job.company}</h3>
+                <p style="color: #6b7280; margin: 0;">${getCompanyDescription(job.company)}</p>
+            `;
+
+            // Update job meta grid
+            document.getElementById('job-meta-grid').innerHTML = `
+                <div class="meta-item">
+                    <span class="meta-icon">💰</span>
+                    <div>
+                        <strong>Salary</strong>
+                        <div>${job.salary}</div>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <div>
+                        <strong>Location</strong>
+                        <div>${job.location}</div>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">⏱️</span>
+                    <div>
+                        <strong>Job Type</strong>
+                        <div>${job.type}</div>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">📅</span>
+                    <div>
+                        <strong>Posted</strong>
+                        <div>${job.posted}</div>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">⏰</span>
+                    <div>
+                        <strong>Deadline</strong>
+                        <div>${job.deadline}</div>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">👥</span>
+                    <div>
+                        <strong>Applicants</strong>
+                        <div>${job.applicants} applied</div>
+                    </div>
+                </div>
+            `;
+
+            // Update deadline text
+            document.getElementById('deadline-text').innerHTML = `
+                Apply before: <strong>${job.deadline}</strong>
+            `;
+
+            // Update apply link
+            document.getElementById('apply-link').href = `apply_job.html?job_id=${jobId}`;
+        }
+
+        // Helper function to get company description
+        function getCompanyDescription(company) {
+            const descriptions = {
+                "Tata Consultancy Services": "Leading IT Services Company",
+                "Infosys": "Global Technology Services",
+                "Wipro": "IT Consulting & Business Solutions",
+                "Flipkart": "E-commerce Marketplace",
+                "Zoho Corporation": "Software Development Company",
+                "Accenture": "Global Professional Services",
+                "HCL Technologies": "IT Services and Consulting",
+                "IBM India": "Technology and Consulting"
+            };
+            return descriptions[company] || "Technology Company";
+        }
+
+        function saveJob() {
+            const jobId = getJobIdFromURL();
+            const job = jobData[jobId];
+            
+            const jobDataToSave = {
+                id: jobId,
+                title: job.title,
+                company: job.company,
+                location: job.location,
+                salary: job.salary
+            };
+            
+            const savedJobs = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+            const existingJob = savedJobs.find(j => j.id === jobId);
+            
+            if (!existingJob) {
+                savedJobs.push(jobDataToSave);
+                localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
+                alert('Job saved successfully! You can view saved jobs in your dashboard.');
+            } else {
+                alert('Job already saved!');
+            }
+        }
+
+        function shareJob(platform) {
+            const jobId = getJobIdFromURL();
+            const job = jobData[jobId];
+            const jobTitle = `${job.title} at ${job.company}`;
+            const url = window.location.href;
+            
+            let shareUrl = '';
+            switch(platform) {
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(`Check out this job: ${jobTitle} - ${url}`)}`;
+                    break;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank');
+            }
+        }
+
+        // Load job data when page loads
+        document.addEventListener('DOMContentLoaded', loadJobData);
+    </script>
+</body>
+</html>

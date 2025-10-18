@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="index.css">
+    <style type="text/css">
+        body{
+            font-size: 16px;
+            background: #f9f9f9;
+        }
+        a{
+            text-decoration: none;
+            color: #82a1d1;
+            margin-left: 130px;
+        }
+        h2{
+            text-align: center;
+            border-bottom: 2px solid #344c92;
+        }
+    </style>
+</head>
+<body>
+    <head>
+        <link rel="icon" href="logo.jpg" />
+    </head>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo"><img src="logo.jpg" alt="logo"></div>
+            <div class="site-title">Talent Track</div>
+            <div style="margin-left:12px;"><div class="searchbar"><img src="logo.jpg" alt="logo"><input aria-label="Search jobs or companies" placeholder="Search jobs or companies"></div></div>
+            <nav class="nav-item">
+                <a href="index.html">Home</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section>
+           <center><h1>Talent Track - Student Registration</h1></center>
+                     <div class="glass-form-wrapper">
+                         <form id="regForm" class="glass-form" action="register.php" action="submit_form.php" method="post">
+                             <h2>Register</h2>
+                             
+                             <div class="glass-field">
+                                 <label for="role">Role</label>
+                                 <select id="role" name="role" required>
+                                     <option value="student">Student</option>
+                                     <option value="admin">Admin</option>
+                                 </select>
+                             </div>
+
+                             <div class="glass-field">
+                                 <label for="name">First name</label>
+                                 <input type="text" id="name" name="name" required>
+                             </div>
+
+                             <div class="glass-field">
+                                 <label for="middle_name">Middle name</label>
+                                 <input type="text" id="middle_name" name="middle_name">
+                             </div>
+
+                             <div class="glass-field">
+                                 <label for="last_name">Last name</label>
+                                 <input type="text" id="last_name" name="last_name" required>
+                             </div>
+
+                             <div class="glass-field">
+                                 <label for="email">Email</label>
+                                 <input type="email" id="email" name="email" required>
+                             </div>
+
+                             <div class="glass-field">
+                                 <label for="phone">Phone</label>
+                                 <input type="tel" id="phone" name="phone">
+                             </div>
+
+                             <div class="glass-field">
+                                 <label for="password">Password</label>
+                                 <input type="password" id="password" name="password" required minlength="6">
+                             </div>
+
+                             <div class="glass-field">
+                                 <label for="conform_password">Confirm password</label>
+                                 <input type="password" id="conform_password" name="conform_password" required>
+                             </div>
+
+                             <div class="glass-actions">
+                                 <button class="glass-btn primary" type="submit">Register</button>
+                             </div>
+                             <p class="glass-small">Already registered? <a href="login.html">Login</a></p>
+                         </form>
+                     </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Talent Track. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Show server-side messages
+        (function(){
+            function getQueryParam(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            const error = getQueryParam('error');
+            const success = getQueryParam('success');
+
+            if (error) {
+                const errorDiv = document.createElement('div');
+                errorDiv.style.background = '#fee2e2';
+                errorDiv.style.color = '#991b1b';
+                errorDiv.style.padding = '10px 12px';
+                errorDiv.style.borderRadius = '8px';
+                errorDiv.style.margin = '10px auto';
+                errorDiv.style.maxWidth = '380px';
+                errorDiv.style.textAlign = 'center';
+                errorDiv.textContent = error;
+                document.querySelector('.glass-form-wrapper').parentNode.insertBefore(errorDiv, document.querySelector('.glass-form-wrapper'));
+            }
+
+            if (success) {
+                const successDiv = document.createElement('div');
+                successDiv.style.background = '#ecfdf5';
+                successDiv.style.color = '#065f46';
+                successDiv.style.padding = '10px 12px';
+                successDiv.style.borderRadius = '8px';
+                successDiv.style.margin = '10px auto';
+                successDiv.style.maxWidth = '380px';
+                successDiv.style.textAlign = 'center';
+                successDiv.textContent = success;
+                document.querySelector('.glass-form-wrapper').parentNode.insertBefore(successDiv, document.querySelector('.glass-form-wrapper'));
+            }
+
+            // Password confirmation validation
+            document.getElementById('regForm').addEventListener('submit', function(e) {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('conform_password').value;
+                
+                if (password !== confirmPassword) {
+                    e.preventDefault();
+                    alert('Passwords do not match!');
+                    return false;
+                }
+                
+                if (password.length < 6) {
+                    e.preventDefault();
+                    alert('Password must be at least 6 characters long!');
+                    return false;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
